@@ -19,7 +19,11 @@ func main() {
 	//router.LoadHTMLFiles("gin_HTML/templates/about.html")
 
 	//router.Static("/assets", "./assets")
-	router.LoadHTMLGlob("templates/*.html")
+	//router.LoadHTMLGlob("templates/*.html")
+	router.LoadHTMLFiles("templates/footer.html",
+		"templates/header.html",
+		"templates/index.html",
+		"templates/about.html")
 
 	router.GET("/", func(context *gin.Context) {
 		context.HTML(http.StatusOK, "index.html", gin.H{
