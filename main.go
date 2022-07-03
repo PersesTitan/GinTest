@@ -1,20 +1,32 @@
 package main
 
 import (
+	"fmt"
 	"github.com/gin-gonic/gin"
-	"html/template"
 	"net/http"
 )
+
+func setRouter(router *gin.Engine) {
+	router.GET("/", func(c *gin.Context) {
+		c.HTML(http.StatusOK, "index.html", gin.H{
+			"Title": "메인페이지",
+		})
+	})
+
+	router.POST("/", func(c *gin.Context) {
+		fmt.Println(c.PostForm("input"))
+	})
+}
 
 func main() {
 	router := gin.Default()
 
-	router.SetFuncMap(template.FuncMap{
-		//"upper": strings.ToUpper,
-		//"safe": func(s string) template.HTML {
-		//	return template.HTML(s)
-		//},
-	})
+	//router.SetFuncMap(template.FuncMap{
+	//	//"upper": strings.ToUpper,
+	//	//"safe": func(s string) template.HTML {
+	//	//	return template.HTML(s)
+	//	//},
+	//})
 
 	//router.LoadHTMLFiles("gin_HTML/templates/about.html")
 
@@ -25,13 +37,15 @@ func main() {
 		"templates/index.html",
 		"templates/about.html")
 
-	router.GET("/", func(context *gin.Context) {
-		context.HTML(http.StatusOK, "index.html", gin.H{
-			"title":   "메인페이지 입니다.",
-			"message": "제목",
-			//"url":     "/about",
-		})
-	})
+	//router.GET("/", func(context *gin.Context) {
+	//	context.HTML(http.StatusOK, "index.html", gin.H{
+	//		"title":   "메인페이지 입니다.",
+	//		"message": "제목",
+	//		//"url":     "/about",
+	//	})
+	//})
+
+	setRouter(router)
 
 	//router.GET("/about", func(context *gin.Context) {
 	//	context.HTML(http.StatusOK, "about.html", gin.H{
