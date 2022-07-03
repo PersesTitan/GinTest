@@ -1,4 +1,9 @@
 {{template "header.html"}}
 <h1 class="title">{{.title}}</h1>
 <p>{{ .message}}</p>
+<form method="post">
+    <label>입력:</label>
+    <input type="text" name="input">
+    <input type="submit" title="버튼" formaction="/">
+</form>
 {{template "footer.html"}}
